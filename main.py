@@ -10,7 +10,7 @@ tasks = [
 ]
 
 
-@app.get("/")
+@app.get("/", summary="API information")
 def read_root():
     return {
         "name": "Task API",
@@ -19,17 +19,17 @@ def read_root():
     }
 
 
-@app.get("/health")
+@app.get("/health", summary="Health check")
 def health_check():
     return {"status": "ok"}
 
 
-@app.get("/tasks")
+@app.get("/tasks", summary="List all tasks")
 def get_tasks():
     return tasks
 
 
-@app.get("/tasks/{task_id}")
+@app.get("/tasks/{task_id}", summary="Get a task by ID")
 def get_task(task_id: int):
     for task in tasks:
         if task["id"] == task_id:
@@ -41,7 +41,7 @@ def get_task(task_id: int):
     )
 
 
-@app.post("/tasks")
+@app.post("/tasks", summary="Create a task")
 def create_task(payload: dict | None = Body(default=None)):
     if payload is None:
         return JSONResponse(
@@ -72,7 +72,7 @@ def create_task(payload: dict | None = Body(default=None)):
         content=new_task
     )
 
-@app.put("/tasks/{task_id}")
+@app.put("/tasks/{task_id}", summary="Update a task")
 def update_task(task_id: int, payload: dict | None = Body(default=None)):
     task = None
 
@@ -117,7 +117,7 @@ def update_task(task_id: int, payload: dict | None = Body(default=None)):
 
     return task
 
-@app.delete("/tasks/{task_id}")
+@app.delete("/tasks/{task_id}", summary="Delete a task")
 def delete_task(task_id: int):
     for index, task in enumerate(tasks):
         if task["id"] == task_id:
