@@ -24,9 +24,9 @@ def init_db():
 
         if task_count == 0:
             seed_tasks = [
-                ("Buy milk", 0),
-                ("Learn FastAPI", 0),
-                ("Connect CRUD to SQLite", 0),
+                ("Learn HTTP basics", 0),
+                ("Build a FastAPI endpoint", 0),
+                ("Test the API", 1),
             ]
 
             cursor.executemany(
